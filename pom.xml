@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.intendia.gwt.autorest</groupId>
             <artifactId>autorest-gwt</artifactId>
-            <version>0.2</version>
+            <version>0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -79,8 +79,25 @@
                     <startupUrls>
                         <url>http://localhost:8888/example</url>
                     </startupUrls>
+                    <codeserverArgs>
+                        <arg>-bindAddress</arg>
+                        <arg>0.0.0.0</arg>
+                    </codeserverArgs>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
