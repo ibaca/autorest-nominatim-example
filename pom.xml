@@ -35,6 +35,13 @@
             <version>0.4-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>com.intendia.gwt.autorest</groupId>
+            <artifactId>autorest-processor</artifactId>
+            <version>0.4-SNAPSHOT</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
