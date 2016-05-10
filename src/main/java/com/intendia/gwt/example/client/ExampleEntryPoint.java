@@ -5,7 +5,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.intendia.gwt.autorest.client.AutoRestGwt;
 import com.intendia.gwt.autorest.client.RequestResourceBuilder;
-import com.intendia.gwt.autorest.client.ResourceFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -28,9 +27,8 @@ public class ExampleEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoad() {
-        ResourceFactory root = ResourceFactory.create(() -> new RequestResourceBuilder()
+        Nominatim nominatim = new Nominatim_RestServiceProxy(() -> new RequestResourceBuilder()
                 .path("http://nominatim.openstreetmap.org/"));
-        Nominatim nominatim = new Nominatim_RestServiceProxy(root);
         nominatim.search("Málaga,España", "json").subscribe(n -> {
             append("[" + (int) (n.importance * 10.) + "] " + n.display_name + " (" + n.lon + "," + n.lat + ")");
         });
