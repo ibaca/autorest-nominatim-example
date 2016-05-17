@@ -16,6 +16,7 @@ public class Main {
                 setHeadless(true);
                 new DevMode.ArgProcessor(options).processArgs(
                         "-superDevMode",
+                        "-bindAddress", "0.0.0.0",
                         "-war", "target/war",
                         "-startupUrl", "example/index.html",
                         "com.intendia.gwt.example.Example");
