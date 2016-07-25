@@ -4,6 +4,7 @@ gen/
 gwt-unitCache/
 war/
 www-test/
+gen-external-apklibs/
 .idea
 .classpath
 .checkstyle

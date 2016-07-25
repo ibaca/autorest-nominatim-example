@@ -11,25 +11,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.intendia.gwt.autorest</groupId>
-            <artifactId>autorest-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.intendia.gwt.autorest</groupId>
-            <artifactId>autorest-processor</artifactId>
-            <scope>provided</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>jsr311-api</artifactId>
-            <version>1.1.1</version>
-            <scope>provided</scope>
+            <groupId>com.intendia.gwt</groupId>
+            <artifactId>autorest-nominatim-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
-            <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

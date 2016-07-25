@@ -1,8 +1,5 @@
 package com.intendia.gwt.example;
 
-import static java.util.stream.StreamSupport.stream;
-import static javax.ws.rs.core.HttpHeaders.ACCEPT;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -14,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
-import javax.ws.rs.core.MediaType;
+import rx.Observable;
 
 public class JreResourceBuilder extends CollectorResourceVisitor {
 
@@ -35,7 +32,7 @@ public class JreResourceBuilder extends CollectorResourceVisitor {
     }
 
     @Override public <T> T as(Class<? super T> container, Class<?> type) {
-        if (!Main.Async.class.equals(container)) {
+        if (!Observable.class.equals(container)) {
             throw new IllegalArgumentException("unsupported type " + container);
         }
 
@@ -43,7 +40,7 @@ public class JreResourceBuilder extends CollectorResourceVisitor {
         try {
             req = (HttpURLConnection) new URL(uri()).openConnection();
             req.setRequestMethod(method);
-            req.setRequestProperty(ACCEPT, MediaType.APPLICATION_JSON);
+            req.setRequestProperty("Accept", "application/json");
             for (Map.Entry<String, String> e : headers.entrySet()) {
                 req.setRequestProperty(e.getKey(), e.getValue());
             }
@@ -55,17 +52,14 @@ public class JreResourceBuilder extends CollectorResourceVisitor {
         try (InputStream inputStream = req.getInputStream()) {
             int rc = req.getResponseCode();
             if (rc != 200) throw new RuntimeException("unexpected response code " + rc);
-            return getAsync(new JsonParser().parse(new InputStreamReader(inputStream)), type);
+            Gson gson = new Gson();
+            JsonElement json = new JsonParser().parse(new InputStreamReader(inputStream));
+            //noinspection unchecked
+            return json.isJsonObject() ?
+                    (T) Observable.just(gson.fromJson(json, type)) :
+                    (T) Observable.from(json.getAsJsonArray()).map(e -> gson.fromJson(e, type));
         } catch (IOException e) {
             throw new RuntimeException("receiving response error: " + e, e);
         }
-    }
-
-    @SuppressWarnings("unchecked") private <T> T getAsync(JsonElement json, Class<?> type) {
-        Gson gson = new Gson();
-        return (T) (Main.Async) fn -> {
-            if (json.isJsonObject()) fn.accept(gson.fromJson(json, type));
-            else stream(json.getAsJsonArray().spliterator(), false).map(e -> gson.fromJson(e, type)).forEach(fn);
-        };
     }
 }
