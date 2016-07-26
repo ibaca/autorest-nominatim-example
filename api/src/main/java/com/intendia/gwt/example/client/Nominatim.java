@@ -1,14 +1,17 @@
 package com.intendia.gwt.example.client;
 
 import com.intendia.gwt.autorest.client.AutoRestGwt;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 import rx.Observable;
 
-@AutoRestGwt @Path("search")
+@AutoRestGwt @Path("search") @Produces(MediaType.APPLICATION_JSON) @Consumes(MediaType.APPLICATION_JSON)
 public interface Nominatim {
 
     @GET Observable<SearchResult> search(@QueryParam("q") String query, @QueryParam("format") String format);
