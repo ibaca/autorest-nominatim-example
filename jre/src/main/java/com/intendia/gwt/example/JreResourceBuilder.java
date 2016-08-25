@@ -21,7 +21,7 @@ public class JreResourceBuilder extends CollectorResourceVisitor {
 
     protected String query() {
         String q = "";
-        for (Param p : params) q += (q.isEmpty() ? "" : "&") + encode(p.key) + "=" + encode(p.value);
+        for (Param p : queryParams) q += (q.isEmpty() ? "" : "&") + encode(p.key) + "=" + encode(p.value.toString());
         return q.isEmpty() ? "" : "?" + q;
     }
 

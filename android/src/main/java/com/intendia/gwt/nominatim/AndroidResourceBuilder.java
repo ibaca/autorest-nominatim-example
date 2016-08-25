@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.intendia.gwt.autorest.client.CollectorResourceVisitor;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,7 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
-
 import rx.Observable;
 import rx.functions.Func0;
 import rx.functions.Func1;
@@ -29,17 +27,13 @@ public class AndroidResourceBuilder extends CollectorResourceVisitor {
 
     private String query() {
         String q = "";
-        for (Param p : params) {
-            q += (q.isEmpty() ? "" : "&") + encode(p.key) + "=" + encode(p.value);
-        }
+        for (Param p : queryParams) q += (q.isEmpty() ? "" : "&") + encode(p.key) + "=" + encode(p.value.toString());
         return q.isEmpty() ? "" : "?" + q;
     }
 
     private String uri() {
         String uri = "";
-        for (String path : paths) {
-            uri += path;
-        }
+        for (String path : paths) uri += path;
         return uri + query();
     }
 
