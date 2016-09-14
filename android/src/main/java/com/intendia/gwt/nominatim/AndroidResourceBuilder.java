@@ -1,5 +1,7 @@
 package com.intendia.gwt.nominatim;
 
+import static com.intendia.gwt.autorest.client.CollectorResourceVisitor.Param.expand;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -10,7 +12,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Map;
+import java.util.Objects;
 import rx.Observable;
 import rx.functions.Func0;
 import rx.functions.Func1;
@@ -27,7 +29,7 @@ public class AndroidResourceBuilder extends CollectorResourceVisitor {
 
     private String query() {
         String q = "";
-        for (Param p : queryParams) q += (q.isEmpty() ? "" : "&") + encode(p.key) + "=" + encode(p.value.toString());
+        for (Param p : expand(queryParams)) q += (q.isEmpty() ? "" : "&") + encode(p.k) + "=" + encode(p.v.toString());
         return q.isEmpty() ? "" : "?" + q;
     }
 
@@ -56,9 +58,7 @@ public class AndroidResourceBuilder extends CollectorResourceVisitor {
                     req = (HttpURLConnection) new URL(uri()).openConnection();
                     req.setRequestMethod(method);
                     req.setRequestProperty("Accept", "application/json");
-                    for (Map.Entry<String, String> e : headers.entrySet()) {
-                        req.setRequestProperty(e.getKey(), e.getValue());
-                    }
+                    for (Param e : headerParams) req.setRequestProperty(e.k, Objects.toString(e.v));
                     // currently data is ignored
                 } catch (IOException e) {
                     throw new RuntimeException("open connection error: " + e, e);
