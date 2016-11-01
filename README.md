@@ -1,13 +1,13 @@
 # AutoREST Nominatim Example
 
-AutoREST generates utility code which should help you extract the request data
+[AutoREST][AutoREST] generates utility code which should help you extract the request data
 on each endpoint call and use it to populate a request. So in simplified example you define…
 ```java
 @AutoRestGwt @Path("search") interface Nominatim {
   @GET Observable<SearchResult> search(@QueryParam("q") String query);
 }
 ```
-AutoREST generates a `Nominatim_RestServiceModel`, and you should implement a `ResourceVisitor` 
+[AutoREST][AutoREST] generates a `Nominatim_RestServiceModel`, and you should implement a `ResourceVisitor` 
 provided as factory to the model, this makes your services instantiations similar to… 
 ```java
 Nominatim nominatim = new Nominatim_RestServiceModel(DummyResourceVisitor::new);
@@ -30,17 +30,15 @@ the request data, creating a request and handling the response into the expected
 you the full control of the request building, request encoding and response decoding is not only much easier, simpler
 and clear as you may expect, but also make it almost trivial to extend and customize your services.
 
-AutoREST separates services handling in three responsibilities
+[AutoREST][AutoREST] separates services handling in three responsibilities
 * **schema** defines the REST service interface and models using [JAX-RS][jaxrs] standard 
 * **request** the goal of client side services is to create a request to transfer the payload
 * **codec** the url, headers and request payload should be encoded/decoded
 
-<div style="background:rgba(170,250,170,.3);border:1px solid green;border-radius:5px;padding:10px">
-You should note that AutoREST should not build the request (althought include a basic implementation), 
+> You should note that AutoREST should not build the request (althought include a basic implementation), 
 do not implement codecs, and schema definition uses the standard JAX-RS, so not AutoREST involved neither.
 For all this, AutoREST should be considered a blueprint which help you organize this responsabilities giving
 a common template and best practices to keep service implementation clean and simple.
-</div>
 
 ## Modules
 
@@ -69,3 +67,4 @@ and is shared between the other modules
 [Resource]: https://github.com/ibaca/autorest-nominatim-example/blob/master/server/src/main/java/com/intendia/gwt/example/ResourceNominatim.java
 [Main]: https://github.com/ibaca/autorest-nominatim-example/blob/master/server/src/main/java/com/intendia/gwt/example/Main.java
 [jaxrs]: https://jax-rs-spec.java.net/
+[AutoREST]: https://github.com/intendia-oss/autorest
