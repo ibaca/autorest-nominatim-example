@@ -34,7 +34,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <mainClass>com.intendia.gwt.example.Main</mainClass>
+                    <mainClass>com.intendia.gwt.example.Client</mainClass>
                 </configuration>
             </plugin>
         </plugins>

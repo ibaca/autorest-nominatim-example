@@ -16,19 +16,23 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 import com.sun.jersey.api.core.DefaultResourceConfig;
 import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.jersey.spi.container.servlet.ServletContainer;
+import java.util.EnumSet;
+import javax.servlet.DispatcherType;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
-import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import rx.Observable;
 import rx.Single;
 
-public class Main {
+public class Server {
     public static void main(String[] args) throws Exception {
         ResourceConfig config = new DefaultResourceConfig(ResourceNominatim.class, ObjectMapperContextResolver.class);
-        Server server = new Server(8080);
+        org.eclipse.jetty.server.Server server = new org.eclipse.jetty.server.Server(8080);
         ServletContextHandler context = new ServletContextHandler(server, "/");
+        context.addFilter(new FilterHolder(new CrossOriginFilter()), "/*", EnumSet.allOf(DispatcherType.class));
         context.addServlet(new ServletHolder(new ServletContainer(config)), "/*");
         server.start();
         server.join();
@@ -37,6 +41,7 @@ public class Main {
     @Provider
     public static class ObjectMapperContextResolver implements ContextResolver<ObjectMapper> {
         final ObjectMapper objectMapper = new ObjectMapper();
+
         {
             objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
             objectMapper.registerModule(new ApplicationJacksonModule());

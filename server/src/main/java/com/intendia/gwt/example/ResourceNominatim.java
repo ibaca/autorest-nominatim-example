@@ -6,13 +6,7 @@ import rx.Observable;
 public class ResourceNominatim implements Nominatim {
 
     @Override public Observable<SearchResult> search(String query, String format) {
-        return Observable.range(1, 10).map(n -> {
-            SearchResult out = new SearchResult();
-            out.display_name = query + "-" + n;
-            out.lon = n + "0.1";
-            out.lat = n + "0.2";
-            out.importance = n;
-            return out;
-        });
+        if (!"json".equals(format)) throw new IllegalArgumentException("only 'json' format supported");
+        return Client.osm().search(query, format);
     }
 }

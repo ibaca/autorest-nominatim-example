@@ -14,7 +14,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <gwt.version>2.8.1</gwt.version>
         <rxjava-gwt.version>1.0.14-beta1</rxjava-gwt.version>
-        <autorest.version>0.5-SNAPSHOT</autorest.version>
+        <autorest.version>HEAD-SNAPSHOT</autorest.version>
     </properties>
 
     <modules>

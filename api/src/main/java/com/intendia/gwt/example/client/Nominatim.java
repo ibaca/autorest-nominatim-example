@@ -6,13 +6,13 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 import rx.Observable;
 
-@AutoRestGwt @Path("search") @Produces(MediaType.APPLICATION_JSON) @Consumes(MediaType.APPLICATION_JSON)
+@AutoRestGwt @Path("search") @Produces("application/json;charset=utf-8") @Consumes("application/json;charset=utf-8")
 public interface Nominatim {
+    String NOMINATIM_OPENSTREETMAP = "http://nominatim.openstreetmap.org/";
 
     @GET Observable<SearchResult> search(@QueryParam("q") String query, @QueryParam("format") String format);
 

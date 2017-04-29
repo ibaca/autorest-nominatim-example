@@ -38,6 +38,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     static ResourceVisitor osm() {
-        return new AndroidResourceBuilder().path("http://nominatim.openstreetmap.org/");
+        return new AndroidResourceBuilder().path(Nominatim.NOMINATIM_OPENSTREETMAP);
     }
 }

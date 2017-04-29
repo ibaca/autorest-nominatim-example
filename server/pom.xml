@@ -16,6 +16,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.intendia.gwt</groupId>
+            <artifactId>autorest-nominatim-jre</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-servlet</artifactId>
             <version>1.19.1</version>
@@ -28,7 +33,12 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
-            <version>9.3.1.v20150714</version>
+            <version>9.4.4.v20170414</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlets</artifactId>
+            <version>9.4.4.v20170414</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
@@ -44,7 +54,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <mainClass>com.intendia.gwt.example.Main</mainClass>
+                    <mainClass>com.intendia.gwt.example.Client</mainClass>
                 </configuration>
             </plugin>
         </plugins>
