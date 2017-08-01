@@ -3,24 +3,12 @@
     <parent>
         <groupId>com.intendia.gwt</groupId>
         <artifactId>autorest-nominatim-example</artifactId>
-        <version>0.1-SNAPSHOT</version>
+        <version>HEAD-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>autorest-nominatim-gwt</artifactId>
     <packaging>gwt-app</packaging>
     <description>AutoREST Nominatim GWT example</description>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt</artifactId>
-                <version>${gwt.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>

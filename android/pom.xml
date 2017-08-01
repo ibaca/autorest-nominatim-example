@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.intendia.gwt</groupId>
         <artifactId>autorest-nominatim-example</artifactId>
-        <version>0.1-SNAPSHOT</version>
+        <version>HEAD-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>autorest-nominatim-android</artifactId>
