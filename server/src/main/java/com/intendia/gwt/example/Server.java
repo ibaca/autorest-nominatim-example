@@ -1,5 +1,7 @@
 package com.intendia.gwt.example;
 
+import static org.eclipse.jetty.servlets.CrossOriginFilter.ALLOWED_HEADERS_PARAM;
+
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.JavaType;
@@ -32,7 +34,8 @@ public class Server {
         ResourceConfig config = new DefaultResourceConfig(ResourceNominatim.class, ObjectMapperContextResolver.class);
         org.eclipse.jetty.server.Server server = new org.eclipse.jetty.server.Server(8080);
         ServletContextHandler context = new ServletContextHandler(server, "/");
-        context.addFilter(new FilterHolder(new CrossOriginFilter()), "/*", EnumSet.allOf(DispatcherType.class));
+        FilterHolder cof = new FilterHolder(new CrossOriginFilter()); cof.setInitParameter(ALLOWED_HEADERS_PARAM, "*");
+        context.addFilter(cof, "/*", EnumSet.allOf(DispatcherType.class));
         context.addServlet(new ServletHolder(new ServletContainer(config)), "/*");
         server.start();
         server.join();
@@ -55,9 +58,7 @@ public class Server {
     public static class ApplicationJacksonModule extends Module {
         @Override public String getModuleName() { return "Application Module"; }
         @Override public Version version() { return Version.unknownVersion(); }
-        @Override public void setupModule(SetupContext c) {
-            c.addSerializers(new RxJavaJacksonSerializers());
-        }
+        @Override public void setupModule(SetupContext c) { c.addSerializers(new RxJavaJacksonSerializers()); }
     }
 
     public static class RxJavaJacksonSerializers extends Serializers.Base {

@@ -13,6 +13,7 @@ import rx.Observable;
 @AutoRestGwt @Path("search") @Produces("application/json;charset=utf-8") @Consumes("application/json;charset=utf-8")
 public interface Nominatim {
     String NOMINATIM_OPENSTREETMAP = "http://nominatim.openstreetmap.org/";
+    String X_API_KEY = "X-Api-Key", TOKEN = "secure"; // custom auth headers example
 
     @GET Observable<SearchResult> search(@QueryParam("q") String query, @QueryParam("format") String format);
 

@@ -33,12 +33,12 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
-            <version>9.4.4.v20170414</version>
+            <version>9.2.14.v20151106</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlets</artifactId>
-            <version>9.4.4.v20170414</version>
+            <version>9.2.14.v20151106</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>

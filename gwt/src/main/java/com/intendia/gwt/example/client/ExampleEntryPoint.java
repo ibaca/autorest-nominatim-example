@@ -1,6 +1,8 @@
 package com.intendia.gwt.example.client;
 
 import static com.intendia.gwt.example.client.Nominatim.NOMINATIM_OPENSTREETMAP;
+import static com.intendia.gwt.example.client.Nominatim.TOKEN;
+import static com.intendia.gwt.example.client.Nominatim.X_API_KEY;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -58,5 +60,5 @@ public class ExampleEntryPoint implements EntryPoint {
         text.setValue("Málaga,España", true);
     }
 
-    static ResourceVisitor osm(String path) { return new RequestResourceBuilder().path(path); }
+    static ResourceVisitor osm(String path) { return new RequestResourceBuilder().path(path).header(X_API_KEY, TOKEN); }
 }
