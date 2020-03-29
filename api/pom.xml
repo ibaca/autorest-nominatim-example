@@ -9,42 +9,12 @@
     <artifactId>autorest-nominatim-api</artifactId>
     <description>AutoREST Nominatim API example</description>
 
-    <properties>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.intendia.gwt.autorest</groupId>
-            <artifactId>autorest-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.intendia.gwt.autorest</groupId>
-            <artifactId>autorest-processor</artifactId>
-            <scope>provided</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>jsr311-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.reactivex</groupId>
-            <artifactId>rxjava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
-            <scope>provided</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <dependencies><!-- @formatter:off -->
+        <dependency><groupId>com.google.gwt</groupId><artifactId>gwt-user</artifactId><version>${gwt.version}</version><scope>provided</scope><optional>true</optional></dependency>
+        <dependency><groupId>com.intendia.gwt.autorest</groupId><artifactId>autorest-core</artifactId></dependency>
+        <dependency><groupId>io.reactivex.rxjava2</groupId><artifactId>rxjava</artifactId><version>${rxjava.version}</version></dependency>
+        <dependency><groupId>javax.ws.rs</groupId><artifactId>jsr311-api</artifactId><scope>provided</scope></dependency>
+        <!-- annotation processor -->
+        <dependency><groupId>com.intendia.gwt.autorest</groupId><artifactId>autorest-processor</artifactId><scope>provided</scope><optional>true</optional></dependency>
+    </dependencies><!-- @formatter:on -->
 </project>

@@ -51,7 +51,6 @@ and is shared between the other modules
 * client implementations: uses the API to build a request
   * [jre module][jre] 
   * [gwt module][gwt]
-  * [android module][android]
 * server implementations: uses the API to expose a service
   * [server module][server] implements the [Nominatim][Nominatim] service definition as 
   [ResourceNominatim][Resource], and exposes it using a jetty + jersey + jackson server. Configuration 
@@ -61,7 +60,6 @@ and is shared between the other modules
 [api]: https://github.com/ibaca/autorest-nominatim-example/tree/master/api
 [jre]: https://github.com/ibaca/autorest-nominatim-example/tree/master/jre
 [gwt]: https://github.com/ibaca/autorest-nominatim-example/tree/master/gwt
-[android]: https://github.com/ibaca/autorest-nominatim-example/tree/master/android
 [server]: https://github.com/ibaca/autorest-nominatim-example/tree/master/server
 [Nominatim]: https://github.com/ibaca/autorest-nominatim-example/blob/master/api/src/main/java/com/intendia/gwt/example/client/Nominatim.java
 [Resource]: https://github.com/ibaca/autorest-nominatim-example/blob/master/server/src/main/java/com/intendia/gwt/example/ResourceNominatim.java

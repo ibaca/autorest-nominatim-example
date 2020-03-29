@@ -1,6 +1,7 @@
 package com.intendia.gwt.example.client;
 
 import com.intendia.gwt.autorest.client.AutoRestGwt;
+import io.reactivex.Observable;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -8,11 +9,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
-import rx.Observable;
 
 @AutoRestGwt @Path("search") @Produces("application/json;charset=utf-8") @Consumes("application/json;charset=utf-8")
 public interface Nominatim {
-    String NOMINATIM_OPENSTREETMAP = "http://nominatim.openstreetmap.org/";
+    String NOMINATIM_OPENSTREETMAP = "https://nominatim.openstreetmap.org/";
     String X_API_KEY = "X-Api-Key", TOKEN = "secure"; // custom auth headers example
 
     @GET Observable<SearchResult> search(@QueryParam("q") String query, @QueryParam("format") String format);

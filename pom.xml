@@ -12,9 +12,9 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <gwt.version>2.8.2</gwt.version>
-        <rxjava-gwt.version>1.3.4-gwt1</rxjava-gwt.version>
-        <autorest.version>HEAD-SNAPSHOT</autorest.version>
+        <gwt.version>2.8.2-rx1</gwt.version>
+        <autorest.version>0.9</autorest.version>
+        <rxjava.version>2.2.10</rxjava.version>
     </properties>
 
     <modules>
@@ -49,16 +49,6 @@
                 <version>1.1.1</version>
             </dependency>
             <dependency>
-                <groupId>com.google.code.findbugs</groupId>
-                <artifactId>jsr305</artifactId>
-                <version>3.0.0</version>
-            </dependency>
-            <dependency>
-                <groupId>io.reactivex</groupId>
-                <artifactId>rxjava</artifactId>
-                <version>1.3.0</version>
-            </dependency>
-            <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt</artifactId>
                 <version>${gwt.version}</version>
@@ -68,13 +58,21 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>net.ltgt.gwt.maven</groupId>
                     <artifactId>gwt-maven-plugin</artifactId>
-                    <version>1.0-rc-8</version>
+                    <version>1.0.0</version>
                     <extensions>true</extensions>
                     <configuration>
                         <skipModule>true</skipModule>
@@ -83,7 +81,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.6.1</version>
+                    <version>3.8.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -91,7 +89,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.1.2</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -112,24 +110,6 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>android</id>
-            <activation>
-                <property>
-                    <name>env.ANDROID_HOME</name>
-                </property>
-            </activation>
-            <modules>
-                <module>android</module>
-                <module>api</module>
-                <module>jre</module>
-                <module>gwt</module>
-                <module>server</module>
-            </modules>
-        </profile>
-    </profiles>
-
     <repositories>
         <repository>
             <id>snapshots-repo</id>
@@ -140,6 +120,10 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>rxjava-gwt-repo</id>
+            <url>https://raw.githubusercontent.com/intendia-oss/rxjava-gwt/mvn-repo/</url>
         </repository>
     </repositories>
 </project>

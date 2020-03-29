@@ -9,23 +9,11 @@
     <artifactId>autorest-nominatim-jre</artifactId>
     <description>AutoREST Nominatim JRE example</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.intendia.gwt</groupId>
-            <artifactId>autorest-nominatim-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-    </dependencies>
+    <dependencies><!-- @formatter:off -->
+        <dependency><groupId>com.intendia.gwt</groupId><artifactId>autorest-nominatim-api</artifactId><version>${project.version}</version></dependency>
+        <dependency><groupId>com.intendia.gwt.autorest</groupId><artifactId>autorest-jre</artifactId><version>${autorest.version}</version></dependency>
+        <dependency><groupId>com.google.code.gson</groupId><artifactId>gson</artifactId><version>2.3.1</version></dependency>
+    </dependencies><!-- @formatter:on -->
 
     <build>
         <plugins>

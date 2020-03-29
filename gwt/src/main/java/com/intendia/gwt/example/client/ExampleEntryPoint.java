@@ -15,8 +15,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.intendia.gwt.autorest.client.RequestResourceBuilder;
 import com.intendia.gwt.autorest.client.ResourceVisitor;
-import rx.Observable;
-import rx.subjects.PublishSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 
 public class ExampleEntryPoint implements EntryPoint {
 
@@ -40,7 +40,7 @@ public class ExampleEntryPoint implements EntryPoint {
         Storage storage = Storage.getLocalStorageIfSupported();
         if (storage != null) {
             try {
-                url.setSelectedIndex(Integer.valueOf(storage.getItem("nominatim.url")));
+                url.setSelectedIndex(Integer.parseInt(storage.getItem("nominatim.url")));
             } catch (Exception ignore) {}
             url.addChangeHandler(c -> storage.setItem("nominatim.url", Integer.toString(url.getSelectedIndex())));
         }
@@ -60,5 +60,7 @@ public class ExampleEntryPoint implements EntryPoint {
         text.setValue("Málaga,España", true);
     }
 
-    static ResourceVisitor osm(String path) { return new RequestResourceBuilder().path(path).header(X_API_KEY, TOKEN); }
+    static ResourceVisitor osm(String path) {
+        return new RequestResourceBuilder().path(path).header(X_API_KEY, TOKEN);
+    }
 }

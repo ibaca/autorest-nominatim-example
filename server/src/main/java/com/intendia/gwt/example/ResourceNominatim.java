@@ -3,11 +3,11 @@ package com.intendia.gwt.example;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 import com.intendia.gwt.example.client.Nominatim;
+import io.reactivex.Observable;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import rx.Observable;
 
 public class ResourceNominatim implements Nominatim {
 

@@ -18,6 +18,8 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 import com.sun.jersey.api.core.DefaultResourceConfig;
 import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.jersey.spi.container.servlet.ServletContainer;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.util.EnumSet;
 import javax.servlet.DispatcherType;
 import javax.ws.rs.ext.ContextResolver;
@@ -26,10 +28,9 @@ import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
-import rx.Observable;
-import rx.Single;
 
 public class Server {
+
     public static void main(String[] args) throws Exception {
         ResourceConfig config = new DefaultResourceConfig(ResourceNominatim.class, ObjectMapperContextResolver.class);
         org.eclipse.jetty.server.Server server = new org.eclipse.jetty.server.Server(8080);
@@ -80,12 +81,12 @@ public class Server {
 
         static class ObservableConverter extends StdConverter<Object, Iterable<?>> {
             static final Converter<Object, Iterable<?>> instance = new ObservableConverter();
-            @Override public Iterable<?> convert(Object v) { return ((Observable<?>) v).toBlocking().toIterable(); }
+            @Override public Iterable<?> convert(Object v) { return ((Observable<?>) v).blockingIterable(); }
         }
 
         static class SingleConverter extends StdConverter<Object, Object> {
             static final Converter<Object, Object> instance = new SingleConverter();
-            @Override public Object convert(Object v) { return ((Single<?>) v).toObservable().toBlocking().single(); }
+            @Override public Object convert(Object v) { return ((Single<?>) v).blockingGet(); }
         }
     }
 }
