@@ -23,25 +23,29 @@ public class ExampleEntryPoint implements EntryPoint {
     public void onModuleLoad() {
         PublishSubject<String> query = PublishSubject.create();
 
-        TextBox text = new TextBox(); RootPanel.get().add(text);
+        TextBox text = new TextBox();
+        RootPanel.get().add(text);
         text.addValueChangeHandler(e -> query.onNext(e.getValue()));
 
-        Button search = new Button("search"); RootPanel.get().add(search);
+        Button search = new Button("search");
+        RootPanel.get().add(search);
         search.addClickHandler(e -> query.onNext(text.getValue()));
 
-        ListBox url = new ListBox(); RootPanel.get().add(url);
+        ListBox url = new ListBox();
+        RootPanel.get().add(url);
         url.addItem(NOMINATIM_OPENSTREETMAP);
         url.addItem("http://localhost:8080/");
         url.addChangeHandler(e -> query.onNext(text.getValue()));
 
-        FlowPanel results = new FlowPanel(); RootPanel.get().add(results);
+        FlowPanel results = new FlowPanel();
+        RootPanel.get().add(results);
 
         // remember last selected server
         Storage storage = Storage.getLocalStorageIfSupported();
         if (storage != null) {
             try {
                 url.setSelectedIndex(Integer.parseInt(storage.getItem("nominatim.url")));
-            } catch (Exception ignore) {}
+            } catch (Exception ignore) { }
             url.addChangeHandler(c -> storage.setItem("nominatim.url", Integer.toString(url.getSelectedIndex())));
         }
 
@@ -53,14 +57,15 @@ public class ExampleEntryPoint implements EntryPoint {
             return nominatim.search(q, "json").doOnNext(n -> results.add(new Label(
                     "[" + (int) (n.importance * 10.) + "] " + n.display_name + " (" + n.lon + "," + n.lat + ")")));
         }).retry((cnt, err) -> {
-            GWT.log("request error: " + err, err); return true;
+            GWT.log("request error: " + err, err);
+            return true;
         }).subscribe();
 
-         // fires initial search
+        // fires initial search
         text.setValue("Málaga,España", true);
     }
 
     static ResourceVisitor osm(String path) {
-        return new RequestResourceBuilder().path(path).header(X_API_KEY, TOKEN);
+        return new RequestResourceBuilder(path).header(X_API_KEY, TOKEN);
     }
 }

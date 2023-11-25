@@ -33,9 +33,11 @@ public class Server {
 
     public static void main(String[] args) throws Exception {
         ResourceConfig config = new DefaultResourceConfig(ResourceNominatim.class, ObjectMapperContextResolver.class);
+        config.getFeatures().put(ResourceConfig.FEATURE_DISABLE_WADL, true);
         org.eclipse.jetty.server.Server server = new org.eclipse.jetty.server.Server(8080);
         ServletContextHandler context = new ServletContextHandler(server, "/");
-        FilterHolder cof = new FilterHolder(new CrossOriginFilter()); cof.setInitParameter(ALLOWED_HEADERS_PARAM, "*");
+        FilterHolder cof = new FilterHolder(new CrossOriginFilter());
+        cof.setInitParameter(ALLOWED_HEADERS_PARAM, "*");
         context.addFilter(cof, "/*", EnumSet.allOf(DispatcherType.class));
         context.addServlet(new ServletHolder(new ServletContainer(config)), "/*");
         server.start();

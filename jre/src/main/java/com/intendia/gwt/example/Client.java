@@ -14,13 +14,13 @@ public class Client {
 
     public static void main(String[] args) {
         Nominatim nominatim = osm();
-        nominatim.search("Málaga, España", "json").subscribe(new Observer<Nominatim.SearchResult>() {
-            @Override public void onSubscribe(Disposable d) {}
+        nominatim.search("Málaga, España", "json").subscribe(new Observer<>() {
+            @Override public void onSubscribe(Disposable d) { }
             @Override public void onNext(Nominatim.SearchResult n) {
                 out.printf("[%.0f] %s (%s,%s)%n", n.importance * 10., n.display_name, n.lon, n.lat);
             }
-            @Override public void onError(Throwable e) { err.println("request error: " + e);}
-            @Override public void onComplete() { out.println("done!");}
+            @Override public void onError(Throwable e) { err.println("request error: " + e); }
+            @Override public void onComplete() { out.println("done!"); }
         });
     }
 

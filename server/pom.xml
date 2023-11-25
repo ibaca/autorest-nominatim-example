@@ -13,17 +13,23 @@
         <dependency><groupId>com.intendia.gwt</groupId><artifactId>autorest-nominatim-api</artifactId><version>${project.version}</version></dependency>
         <dependency><groupId>com.intendia.gwt</groupId><artifactId>autorest-nominatim-jre</artifactId><version>${project.version}</version></dependency>
         <dependency><groupId>com.sun.jersey</groupId><artifactId>jersey-servlet</artifactId><version>1.19.1</version></dependency>
-        <dependency><groupId>com.fasterxml.jackson.jaxrs</groupId><artifactId>jackson-jaxrs-json-provider</artifactId><version>2.6.0</version></dependency>
-        <dependency><groupId>org.eclipse.jetty</groupId><artifactId>jetty-servlet</artifactId><version>9.2.14.v20151106</version></dependency>
-        <dependency><groupId>org.eclipse.jetty</groupId><artifactId>jetty-servlets</artifactId><version>9.4.41.v20210516</version></dependency>
-    </dependencies><!-- @formatter:off -->
+        <dependency><groupId>com.fasterxml.jackson.jaxrs</groupId><artifactId>jackson-jaxrs-json-provider</artifactId><version>2.15.0</version></dependency>
+        <dependency><groupId>org.eclipse.jetty</groupId><artifactId>jetty-servlet</artifactId></dependency>
+        <dependency><groupId>org.eclipse.jetty</groupId><artifactId>jetty-servlets</artifactId></dependency>
+        <dependency><groupId>javax.ws.rs</groupId><artifactId>javax.ws.rs-api</artifactId><version>2.1.1</version></dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency><groupId>org.eclipse.jetty</groupId><artifactId>jetty-bom</artifactId><version>9.4.51.v20230217</version></dependency>
+        </dependencies>
+    </dependencyManagement><!-- @formatter:off -->
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>3.1.0</version>
                 <configuration>
                     <mainClass>com.intendia.gwt.example.Client</mainClass>
                 </configuration>
